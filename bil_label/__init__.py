@@ -104,7 +104,7 @@ def print_br_label(device_id, device_name, eth_mac, wifi_mac):
 
     both_img = Image.new("RGB", (img.width + barcode_img.width, img.height), "white")
 
-    both_img.paste(img)
+    both_img.paste(img, (0, -10))
     both_img.paste(barcode_img, (img.width, 0))
 
     return print_labels([both_img])
