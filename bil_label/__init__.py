@@ -35,7 +35,7 @@ def print_speck_labels(device_id, device_name, device_type=None):
     id_img = generate_internal_id_label(device_id)
     barcode_img = generate_dmtx(device_id);
 
-    print_labels([id_name_img, id_img, barcode_img])
+    return print_labels([id_name_img, id_img, barcode_img])
 
 def generate_dmtx(data):
     encoded = dmtx_encode(data.encode('utf8'), size='12x26')
@@ -107,9 +107,7 @@ def print_br_label(device_id, device_name, eth_mac, wifi_mac):
     both_img.paste(img)
     both_img.paste(barcode_img, (img.width, 0))
 
-    both_img.show()
-
-    #print_labels([img])
+    return print_labels([both_img])
 
 def generate_br_id_name_img(device_id, device_name, eth_mac, wifi_mac):
     device_id = device_id.upper()
@@ -169,6 +167,8 @@ def generate_internal_id_label(device_id):
 
 def print_labels(labels):
     brother_usb_id = find_brother()
+    if brother_usb_id is None:
+        return None
     backend = brotherlabel.USBBackend(f"usb://{brother_usb_id}")
     printer = brotherlabel.PTPrinter(backend)
     printer.quality = brotherlabel.Quality.high_quality
@@ -178,8 +178,7 @@ def print_labels(labels):
     #for x in labels:
     #    x.show()
 
-    printer.print(labels)
-
+    return printer.print(labels)
 
 if __name__ == "__main__":
     import argparse
