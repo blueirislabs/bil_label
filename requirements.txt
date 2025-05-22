@@ -1,4 +1,4 @@
-git+ssh://git@github.com/blueirislabs/bil_name.git
+bil_name@git+https://github.com/blueirislabs/bil_name
 py-brotherlabel@git+https://github.com/masatomizuta/py-brotherlabel
 pylibdmtx
 matplotlib
